@@ -173,8 +173,8 @@ class TestUsageLoggerDefaults:
     def test_default_log_path(self):
         """Test that default log path is in user home directory."""
         logger = UsageLogger()
-        assert str(logger.log_file_path).startswith(str(Path.home()))
-        assert ".ha-mcp" in str(logger.log_file_path)
+        expected_path = Path.home() / ".ha-mcp" / "logs" / "mcp_usage.jsonl"
+        assert logger.log_file_path == expected_path
         logger.shutdown()
 
 

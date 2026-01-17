@@ -157,8 +157,11 @@ printf "\n"
 # Step 3: Pre-download dependencies
 printf "${YELLOW}Step 3: Pre-downloading ha-mcp...${NC}\n"
 printf "  This speeds up Claude Desktop startup...\n"
-"$UVX_PATH" --refresh ha-mcp@latest --version > /dev/null 2>&1 || true
-printf "${GREEN}  Dependencies cached${NC}\n"
+if "$UVX_PATH" --refresh ha-mcp@latest --version > /dev/null 2>&1; then
+    printf "${GREEN}  Dependencies cached${NC}\n"
+else
+    printf "${YELLOW}  Warning: Failed to pre-cache dependencies. Installation continues...${NC}\n"
+fi
 printf "\n"
 
 # Success message
